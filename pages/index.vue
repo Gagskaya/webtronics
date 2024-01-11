@@ -8,7 +8,7 @@ const router = useRouter();
 
 
 const {data} = await useFetch('http://127.0.0.1:3002/users/1?_embed=tickets');
-state.tickets = data.value.tickets;
+state.tickets = data.value?.tickets;
 
 onMounted(() => {
   const token = localStorage?.getItem('token');
