@@ -1,5 +1,5 @@
 <script setup lang="js">
-import { getData} from 'nuxt-storage/local-storage';
+import  nuxtStorage from 'nuxt-storage';
 
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
@@ -15,7 +15,7 @@ state.user = data.value;
 console.log(data.value, state.user);
 
 const router = useRouter();
-const token = getData('token');
+const token = nuxtStorage.localStorage.getData('token');
 
 if(!token) {
   router.push('login')

@@ -1,9 +1,10 @@
 <script setup lang="js">
-import { setData, getData} from 'nuxt-storage/local-storage';
+import nuxtStorage from 'nuxt-storage';
+
 
 const router = useRouter();
 
-const token = getData('token');
+const token = nuxtStorage.localStorage.getData('token');
 
 console.log(token);
 
@@ -13,7 +14,7 @@ const onSubmit = async () => {
     body : {email : state.email, password : state.password},
     onResponse({_, response}) {
      const token = response._data.accessToken;
-     setData('token', token);
+     nuxtStorage.localStorage.setData('token', token);
      router.push('/');
     },
 
