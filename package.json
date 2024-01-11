@@ -1,0 +1,27 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "startDb": "json-server db/db.json --watch --port 3002 -m ./node_modules/json-server-auth"
+  },
+  "devDependencies": {
+    "json-server": "^0.17.4",
+    "json-server-auth": "^2.1.0",
+    "nuxt": "^3.9.0",
+    "vue": "^3.4.5",
+    "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "@vuepic/vue-datepicker": "^7.4.1",
+    "axios": "^1.6.5",
+    "nuxt-storage": "^1.2.2",
+    "sass": "^1.69.7",
+    "vue3-datepicker": "^0.4.0"
+  }
+}
