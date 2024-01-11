@@ -2,6 +2,8 @@
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 
+import {API_URL} from '../constants';
+
 const router = useRouter();
 
 const state = reactive({
@@ -9,7 +11,7 @@ const state = reactive({
   date : '09.09.1976'
 })
 
-const {data} = await useFetch('http://127.0.0.1:3002/users/1?_embed=tickets');
+const {data} = await useFetch(`${API_URL}/users/1?_embed=tickets`);
 
 state.user = data.value;
 

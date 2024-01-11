@@ -1,4 +1,5 @@
 <script setup lang="js">
+import {API_URL} from '../constants';
 
 const state = reactive({
   tickets : []
@@ -7,7 +8,7 @@ const state = reactive({
 const router = useRouter();
 
 
-const {data} = await useFetch('http://127.0.0.1:3002/users/1?_embed=tickets');
+const {data} = await useFetch(`${API_URL}/users/1?_embed=tickets`);
 state.tickets = data.value?.tickets;
 
 onMounted(() => {

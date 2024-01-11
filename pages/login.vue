@@ -1,8 +1,9 @@
 <script setup lang="js">
 const router = useRouter();
+import {API_URL} from '../constants';
 
 const onSubmit = async () => {
-  await useFetch('http://127.0.0.1:3002/login', {
+  await useFetch(`${API_URL}/login`, {
     method : 'POST',
     body : {email : state.email, password : state.password},
     onResponse({_, response}) {

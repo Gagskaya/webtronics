@@ -1,4 +1,6 @@
 <script setup lang="js">
+import {API_URL} from '../../constants';
+
 const route = useRoute();
 const router = useRouter();
 
@@ -6,7 +8,7 @@ const state = reactive({
     ticket : {}
 });
 
-const {data} = await useFetch(`http://127.0.0.1:3002/tickets/${route.params.id}`);
+const {data} = await useFetch(`${API_URL}/tickets/${route.params.id}`);
 state.ticket = data.value;
 
 onMounted(() => {
