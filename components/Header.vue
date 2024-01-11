@@ -1,8 +1,16 @@
-<script lang="js" setup></script>
+<script lang="js" setup>
+const router = useRouter();
+
+const onLogoutClick = () => {
+  router.push('/login');
+  localStorage.removeItem('token');
+};
+</script>
 <template>
   <header class="header">
     <NuxtLink to="/" class="header__link">Главная</NuxtLink>
     <NuxtLink to="profile" class="header__link">Профиль</NuxtLink>
+    <button @click="onLogoutClick">Выйти</button>
   </header>
 </template>
 
