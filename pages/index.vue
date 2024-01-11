@@ -1,21 +1,22 @@
 <script setup lang="js">
-import { getData} from 'nuxt-storage/local-storage';
 
 const state = reactive({
   tickets : []
-})
+});
 
 const router = useRouter();
-const token = getData('token');
 
-
-if(!token) {
-  router.push('login')
-}
 
 const {data} = await useFetch('http://127.0.0.1:3002/users/1?_embed=tickets');
 state.tickets = data.value.tickets;
-// state.tickets = data;
+
+onMounted(() => {
+  const token = localStorage?.getItem('token');
+
+  if(!token) {
+    router.push('login');
+  };
+})
 </script>
 
 <template>

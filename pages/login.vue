@@ -1,12 +1,5 @@
 <script setup lang="js">
-import nuxtStorage from 'nuxt-storage';
-
-
 const router = useRouter();
-
-const token = nuxtStorage.localStorage.getData('token');
-
-console.log(token);
 
 const onSubmit = async () => {
   await useFetch('http://127.0.0.1:3002/login', {
@@ -14,7 +7,7 @@ const onSubmit = async () => {
     body : {email : state.email, password : state.password},
     onResponse({_, response}) {
      const token = response._data.accessToken;
-     nuxtStorage.localStorage.setData('token', token);
+     localStorage.setItem('token', token);
      router.push('/');
     },
 
@@ -22,7 +15,6 @@ const onSubmit = async () => {
       alert(response._data)
     }
   });
-
 }
 
 const state = reactive({
@@ -30,9 +22,12 @@ const state = reactive({
   password : ""
 });
 
-if(token) {
-  router.push('/')
-}
+onMounted(() => {
+  const token = localStorage.getItem('token');
+  if(token) {
+    router.push('/');
+  }
+})
 </script>
 <template>
   <div class="container">

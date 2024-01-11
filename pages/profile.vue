@@ -1,8 +1,8 @@
 <script setup lang="js">
-import  nuxtStorage from 'nuxt-storage';
-
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+
+const router = useRouter();
 
 const state = reactive({
   user : {},
@@ -12,14 +12,14 @@ const state = reactive({
 const {data} = await useFetch('http://127.0.0.1:3002/users/1?_embed=tickets');
 
 state.user = data.value;
-console.log(data.value, state.user);
 
-const router = useRouter();
-const token = nuxtStorage.localStorage.getData('token');
+onMounted(() => {
+  const token = localStorage?.getItem('token');
 
-if(!token) {
-  router.push('login')
-}
+  if(!token) {
+    router.push('login');
+  }
+})
 </script>
 <template>
   <div class="container">

@@ -1,12 +1,21 @@
 <script setup lang="js">
 const route = useRoute();
+const router = useRouter();
 
 const state = reactive({
     ticket : {}
-})
+});
 
 const {data} = await useFetch(`http://127.0.0.1:3002/tickets/${route.params.id}`);
-state.ticket = data.value
+state.ticket = data.value;
+
+onMounted(() => {
+  const token = localStorage?.getItem('token');
+
+if(!token) {
+  router.push('login');
+}
+});
 </script>
 <template>
   <div class="container">
