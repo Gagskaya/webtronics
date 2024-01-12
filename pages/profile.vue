@@ -32,13 +32,13 @@ onMounted(() => {
       </p>
       <p>Почта: {{ state.user?.email }}</p>
       <div style="display: flex; align-items: center">
-        <p style="margin-right: 15px">День рождения:</p>
+        <p style="margin-right: 5px">День рождения:</p>
         <VueDatePicker v-model="state.date" style="width: 200px" />
       </div>
 
       <p>
         Город:
-        <select name="city" id="city">
+        <select name="city" id="city" class="profile__city">
           <option>Москва</option>
           <option>Санкт-Петербург</option>
           <option>Таганрог</option>
@@ -54,5 +54,8 @@ onMounted(() => {
 }
 .profile {
   margin-top: 30px;
+  &__city {
+    padding: 5px;
+  }
 }
 </style>

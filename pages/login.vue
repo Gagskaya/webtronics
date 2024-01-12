@@ -1,6 +1,18 @@
 <script setup lang="js">
-const router = useRouter();
 import {API_URL} from '../constants';
+
+const router = useRouter();
+
+const state = reactive({
+  email : "",
+  password : "",
+  isVisiblePassword : false
+});
+
+const togglePasswordType = () => {
+  state.isVisiblePassword = !state.isVisiblePassword;
+}
+
 
 const onSubmit = async () => {
   await useFetch(`${API_URL}/login`, {
@@ -11,17 +23,13 @@ const onSubmit = async () => {
      localStorage.setItem('token', token);
      router.push('/');
     },
-
     onResponseError({_, response}) {
       alert(response._data)
     }
   });
 }
 
-const state = reactive({
-  email : "",
-  password : ""
-});
+
 
 onMounted(() => {
   const token = localStorage.getItem('token');
@@ -39,13 +47,28 @@ onMounted(() => {
         type="email"
         v-model="state.email"
       />
-      <input
-        placeholder="Пароль"
-        class="login__input login__input-password"
-        type="password"
-        v-model="state.password"
-        @keydown.enter="onSubmit"
-      />
+      <div class="login__input-wrap">
+        <input
+          placeholder="Пароль"
+          class="login__input login__input-password"
+          :type="state.isVisiblePassword ? 'text' : 'password'"
+          v-model="state.password"
+          @keydown.enter="onSubmit"
+        />
+        <font-awesome-icon
+          icon="eye-slash"
+          class="login__input-password-icon"
+          v-show="state.isVisiblePassword"
+          @click="togglePasswordType"
+        />
+        <font-awesome-icon
+          icon="eye"
+          class="login__input-password-icon"
+          @click="togglePasswordType"
+          v-show="!state.isVisiblePassword"
+        />
+      </div>
+
       <button
         class="login__btn"
         @click="onSubmit"
@@ -73,9 +96,18 @@ onMounted(() => {
     display: inline-block;
     min-width: 290px;
     padding: 10px 15px;
+    &-wrap {
+      position: relative;
+    }
     &-password {
       margin-top: 15px;
       margin-bottom: 15px;
+      &-icon {
+        position: absolute;
+        top: 27px;
+        right: 15px;
+        cursor: pointer;
+      }
     }
   }
   &__btn {

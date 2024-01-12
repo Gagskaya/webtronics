@@ -54,10 +54,15 @@ onMounted(() => {
 }
 table {
   margin-top: 30px;
+  border-collapse: collapse;
+  tr {
+    border-bottom: 1px solid rgb(212, 211, 211);
+    border-top: 1px solid rgb(212, 211, 211);
+  }
   td,
   th {
     padding: 15px;
-    border: 1px solid rgb(212, 211, 211);
+    // border-bottom: 1px solid rgb(212, 211, 211);
     border-radius: 4px;
   }
 }
